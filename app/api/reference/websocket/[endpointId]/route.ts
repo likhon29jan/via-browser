@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 import { getWebSocketEndpoint } from '@/lib/reference/api-reference'
 
@@ -6,9 +6,10 @@ export const dynamic = 'force-static'
 export const revalidate = 3600
 
 export async function GET(
-  _request: Request,
-  { params }: { params: { endpointId: string } },
+  _request: NextRequest,
+  { params: paramsPromise }: { params: Promise<{ endpointId: string }> },
 ) {
+  const params = await paramsPromise
   const endpoint = getWebSocketEndpoint(params.endpointId)
 
   if (!endpoint) {

@@ -100,10 +100,10 @@ export default function Home() {
               </h3>
               <p>
                 Unlike many scraping tools, you can also use the standard
-                Puppeteer and Playwright libraries to run any script for
-                browser scraping. You can click buttons, navigate dynamic
-                content or anything else. Just host the scripts in your
-                servers and connect them to our browsers.
+                Puppeteer and Playwright libraries to run any script for browser
+                scraping. You can click buttons, navigate dynamic content or
+                anything else. Just host the scripts in your servers and connect
+                them to our browsers.
               </p>
             </div>
           </div>
