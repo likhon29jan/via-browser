@@ -1,15 +1,16 @@
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
 import { getFeatureIdea } from '@/lib/vision/feature-ideas'
 
 type Params = {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export const dynamic = 'force-static'
 export const revalidate = 3600
 
-export async function GET(_: Request, { params }: Params) {
+export async function GET(_: NextRequest, { params: paramsPromise }: Params) {
+  const params = await paramsPromise
   const feature = getFeatureIdea(params.slug)
 
   if (!feature) {

@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Via Browser](https://raw.githubusercontent.com/likhon29jan/via-browser/refs/heads/main/public/492x0w%20(1).webp)
+![Via Browser](<https://raw.githubusercontent.com/likhon29jan/via-browser/refs/heads/main/public/492x0w%20(1).webp>)
 
 **Fast, Simple, and Secure Browser Automation**
 

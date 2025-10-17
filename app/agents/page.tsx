@@ -80,7 +80,7 @@ const serviceModels: ServiceModel[] = [
   },
   {
     name: 'AI Agent SDK',
-    usecase: 'Intelligent automation with LLM integration',
+    useCase: 'Intelligent automation with LLM integration',
     differentiator: 'Built-in context management and decision-making',
   },
 ]
