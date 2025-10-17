@@ -1,27 +1,27 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
 
-import { getFeatureEndpoint } from "@/lib/vision/feature-ideas";
+import { getFeatureEndpoint } from '@/lib/vision/feature-ideas'
 
 type Params = {
-  params: { slug: string; endpointId: string };
-};
+  params: { slug: string; endpointId: string }
+}
 
-export const dynamic = "force-static";
-export const revalidate = 3600;
+export const dynamic = 'force-static'
+export const revalidate = 3600
 
 export async function GET(_: Request, { params }: Params) {
-  const endpoint = getFeatureEndpoint(params.slug, params.endpointId);
+  const endpoint = getFeatureEndpoint(params.slug, params.endpointId)
 
   if (!endpoint) {
     return NextResponse.json(
       {
-        error: "Endpoint not found",
+        error: 'Endpoint not found',
         slug: params.slug,
-        endpointId: params.endpointId
+        endpointId: params.endpointId,
       },
-      { status: 404 }
-    );
+      { status: 404 },
+    )
   }
 
-  return NextResponse.json(endpoint);
+  return NextResponse.json(endpoint)
 }

@@ -8,12 +8,12 @@ Via Browser is a powerful browser automation platform designed for AI agents, de
 
 Via Browser offers multiple entry points for browser automation, each optimized for different use cases:
 
-| Service Model | Primary Use-Case | Key Differentiator |
-|--------------|------------------|-------------------|
-| **CDP-Based API** | Cross-language automation with low-level control | Direct Chrome DevTools Protocol access for maximum flexibility |
-| **Browsers as a Service (BaaS)** | Running custom scripts with Playwright/Puppeteer | Local development experience in the cloud |
-| **REST APIs** | Simple tasks (PDFs, screenshots, scraping) | Stateless HTTP requests for quick integrations |
-| **AI Agent SDK** | Intelligent automation with LLM integration | Built-in context management and decision-making |
+| Service Model                    | Primary Use-Case                                 | Key Differentiator                                             |
+| -------------------------------- | ------------------------------------------------ | -------------------------------------------------------------- |
+| **CDP-Based API**                | Cross-language automation with low-level control | Direct Chrome DevTools Protocol access for maximum flexibility |
+| **Browsers as a Service (BaaS)** | Running custom scripts with Playwright/Puppeteer | Local development experience in the cloud                      |
+| **REST APIs**                    | Simple tasks (PDFs, screenshots, scraping)       | Stateless HTTP requests for quick integrations                 |
+| **AI Agent SDK**                 | Intelligent automation with LLM integration      | Built-in context management and decision-making                |
 
 ## 🔧 Key Features
 
@@ -61,39 +61,39 @@ Connect via WebSocket for full programmatic control:
 
 ```javascript
 // Puppeteer (Chromium)
-import puppeteer from 'puppeteer-core';
+import puppeteer from 'puppeteer-core'
 
 const browser = await puppeteer.connect({
-  browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
-});
+  browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN',
+})
 
-const page = await browser.newPage();
-await page.goto('https://example.com');
-const content = await page.content();
-await browser.close();
+const page = await browser.newPage()
+await page.goto('https://example.com')
+const content = await page.content()
+await browser.close()
 ```
 
 ```javascript
 // Playwright (Firefox)
-import { firefox } from 'playwright';
+import { firefox } from 'playwright'
 
 const browser = await firefox.connect(
-  'wss://viabrowserai.vercel.app/firefox?token=YOUR_TOKEN'
-);
+  'wss://viabrowserai.vercel.app/firefox?token=YOUR_TOKEN',
+)
 
-const context = await browser.newContext();
-const page = await context.newPage();
-await page.goto('https://example.com');
-await browser.close();
+const context = await browser.newContext()
+const page = await context.newPage()
+await page.goto('https://example.com')
+await browser.close()
 ```
 
 ```javascript
 // Playwright (WebKit)
-import { webkit } from 'playwright';
+import { webkit } from 'playwright'
 
 const browser = await webkit.connect(
-  'wss://viabrowserai.vercel.app/webkit?token=YOUR_TOKEN'
-);
+  'wss://viabrowserai.vercel.app/webkit?token=YOUR_TOKEN',
+)
 ```
 
 ### Live Session URL Generation
@@ -101,30 +101,31 @@ const browser = await webkit.connect(
 Create interactive, shareable browser sessions:
 
 ```javascript
-import puppeteer from 'puppeteer-core';
+import puppeteer from 'puppeteer-core'
 
 async function createLiveSession() {
   const browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
-  });
-  
-  const page = await browser.newPage();
-  const cdp = await page.createCDPSession();
+    browserWSEndpoint:
+      'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN',
+  })
 
-  await page.goto('https://example.com');
+  const page = await browser.newPage()
+  const cdp = await page.createCDPSession()
+
+  await page.goto('https://example.com')
 
   // Generate live URL for human monitoring
   const { liveURL } = await cdp.send('ViaBrowser.getLiveURL', {
-    quality: 'high',  // Options: 'low', 'medium', 'high'
-    type: 'view'      // Options: 'view', 'interact'
-  });
+    quality: 'high', // Options: 'low', 'medium', 'high'
+    type: 'view', // Options: 'view', 'interact'
+  })
 
-  console.log('Watch live at:', liveURL);
-  
+  console.log('Watch live at:', liveURL)
+
   // Continue automation while session is observable
-  await page.type('#search', 'AI automation');
-  
-  return liveURL;
+  await page.type('#search', 'AI automation')
+
+  return liveURL
 }
 ```
 
@@ -183,17 +184,20 @@ Enable advanced bot detection evasion:
 
 ```javascript
 const browser = await puppeteer.connect({
-  browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'
-});
+  browserWSEndpoint:
+    'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true',
+})
 
 // Or via REST API
-const launchOptions = encodeURIComponent(JSON.stringify({
-  stealth: true,
-  blockAds: true,
-  timezone: 'America/New_York'
-}));
+const launchOptions = encodeURIComponent(
+  JSON.stringify({
+    stealth: true,
+    blockAds: true,
+    timezone: 'America/New_York',
+  }),
+)
 
-const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=${launchOptions}`;
+const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=${launchOptions}`
 ```
 
 ## 🤖 AI Agent Integration Patterns
@@ -203,46 +207,53 @@ const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=
 AI agents can orchestrate browsers to gather intelligence:
 
 ```javascript
-import { Anthropic } from '@anthropic-ai/sdk';
-import puppeteer from 'puppeteer-core';
+import { Anthropic } from '@anthropic-ai/sdk'
+import puppeteer from 'puppeteer-core'
 
 async function researchAgent(topic) {
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
   const browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
-  });
-  
-  const page = await browser.newPage();
-  
+    browserWSEndpoint:
+      'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN',
+  })
+
+  const page = await browser.newPage()
+
   // Navigate to search
-  await page.goto(`https://www.google.com/search?q=${encodeURIComponent(topic)}`);
-  
+  await page.goto(
+    `https://www.google.com/search?q=${encodeURIComponent(topic)}`,
+  )
+
   // Extract search results
   const results = await page.evaluate(() => {
-    return Array.from(document.querySelectorAll('.g')).slice(0, 5).map(el => ({
-      title: el.querySelector('h3')?.textContent,
-      snippet: el.querySelector('.VwiC3b')?.textContent,
-      url: el.querySelector('a')?.href
-    }));
-  });
-  
+    return Array.from(document.querySelectorAll('.g'))
+      .slice(0, 5)
+      .map((el) => ({
+        title: el.querySelector('h3')?.textContent,
+        snippet: el.querySelector('.VwiC3b')?.textContent,
+        url: el.querySelector('a')?.href,
+      }))
+  })
+
   // Let Claude analyze the results
   const response = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
     max_tokens: 2000,
-    messages: [{
-      role: 'user',
-      content: `Analyze these search results about "${topic}" and provide key insights:\n\n${JSON.stringify(results, null, 2)}`
-    }]
-  });
-  
-  await browser.close();
-  
+    messages: [
+      {
+        role: 'user',
+        content: `Analyze these search results about "${topic}" and provide key insights:\n\n${JSON.stringify(results, null, 2)}`,
+      },
+    ],
+  })
+
+  await browser.close()
+
   return {
     searchResults: results,
-    analysis: response.content[0].text
-  };
+    analysis: response.content[0].text,
+  }
 }
 ```
 
@@ -251,48 +262,53 @@ async function researchAgent(topic) {
 Combine screenshots with vision models:
 
 ```javascript
-import Anthropic from '@anthropic-ai/sdk';
+import Anthropic from '@anthropic-ai/sdk'
 
 async function analyzeWebpage(url) {
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
   // Capture screenshot via REST API
-  const response = await fetch(`https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      url: url,
-      options: { type: 'png', fullPage: true }
-    })
-  });
-  
-  const imageBuffer = await response.arrayBuffer();
-  const base64Image = Buffer.from(imageBuffer).toString('base64');
-  
+  const response = await fetch(
+    `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: url,
+        options: { type: 'png', fullPage: true },
+      }),
+    },
+  )
+
+  const imageBuffer = await response.arrayBuffer()
+  const base64Image = Buffer.from(imageBuffer).toString('base64')
+
   // Analyze with Claude's vision capabilities
   const analysis = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
     max_tokens: 1500,
-    messages: [{
-      role: 'user',
-      content: [
-        {
-          type: 'image',
-          source: {
-            type: 'base64',
-            media_type: 'image/png',
-            data: base64Image
-          }
-        },
-        {
-          type: 'text',
-          text: 'Analyze this webpage. What is the main purpose? Identify key UI elements and provide UX recommendations.'
-        }
-      ]
-    }]
-  });
-  
-  return analysis.content[0].text;
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'image',
+            source: {
+              type: 'base64',
+              media_type: 'image/png',
+              data: base64Image,
+            },
+          },
+          {
+            type: 'text',
+            text: 'Analyze this webpage. What is the main purpose? Identify key UI elements and provide UX recommendations.',
+          },
+        ],
+      },
+    ],
+  })
+
+  return analysis.content[0].text
 }
 ```
 
@@ -300,75 +316,82 @@ async function analyzeWebpage(url) {
 
 Multi-step automation with decision-making:
 
-```javascript
-import { Anthropic } from '@anthropic-ai/sdk';
-import puppeteer from 'puppeteer-core';
+````javascript
+import { Anthropic } from '@anthropic-ai/sdk'
+import puppeteer from 'puppeteer-core'
 
 async function workflowAgent(task) {
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
   const browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'
-  });
-  
-  const page = await browser.newPage();
-  const conversationHistory = [];
-  
+    browserWSEndpoint:
+      'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true',
+  })
+
+  const page = await browser.newPage()
+  const conversationHistory = []
+
   // Initial plan
   let response = await anthropic.messages.create({
     model: 'claude-sonnet-4-20250514',
     max_tokens: 1000,
-    messages: [{
-      role: 'user',
-      content: `Create a step-by-step plan to: ${task}\n\nRespond with JSON: {"steps": ["step1", "step2", ...]}`
-    }]
-  });
-  
-  const plan = JSON.parse(response.content[0].text);
-  
+    messages: [
+      {
+        role: 'user',
+        content: `Create a step-by-step plan to: ${task}\n\nRespond with JSON: {"steps": ["step1", "step2", ...]}`,
+      },
+    ],
+  })
+
+  const plan = JSON.parse(response.content[0].text)
+
   // Execute each step
   for (const step of plan.steps) {
-    console.log(`Executing: ${step}`);
-    
+    console.log(`Executing: ${step}`)
+
     // Get current page state
     const pageInfo = await page.evaluate(() => ({
       url: window.location.href,
       title: document.title,
       forms: Array.from(document.querySelectorAll('form')).length,
-      buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim())
-    }));
-    
+      buttons: Array.from(document.querySelectorAll('button')).map((b) =>
+        b.textContent.trim(),
+      ),
+    }))
+
     // Ask Claude what to do next
     conversationHistory.push({
       role: 'user',
-      content: `Current page: ${JSON.stringify(pageInfo)}\nNext step: ${step}\n\nProvide Puppeteer code to execute this step.`
-    });
-    
+      content: `Current page: ${JSON.stringify(pageInfo)}\nNext step: ${step}\n\nProvide Puppeteer code to execute this step.`,
+    })
+
     response = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 500,
-      messages: conversationHistory
-    });
-    
-    const code = response.content[0].text.match(/```javascript\n([\s\S]*?)\n```/)?.[1];
-    
+      messages: conversationHistory,
+    })
+
+    const code = response.content[0].text.match(
+      /```javascript\n([\s\S]*?)\n```/,
+    )?.[1]
+
     if (code) {
       // Execute the generated code (in production, use proper sandboxing)
-      await eval(`(async () => { ${code} })()`);
+      await eval(`(async () => { ${code} })()`)
     }
-    
+
     conversationHistory.push({
       role: 'assistant',
-      content: response.content[0].text
-    });
-    
-    await page.waitForTimeout(1000);
+      content: response.content[0].text,
+    })
+
+    await page.waitForTimeout(1000)
   }
-  
-  await browser.close();
-  
-  return { success: true, steps: plan.steps };
+
+  await browser.close()
+
+  return { success: true, steps: plan.steps }
 }
-```
+````
 
 ## 🔌 Pre-built Integrations
 
@@ -401,19 +424,21 @@ Via Browser provides native n8n nodes for visual automation:
 ### Vercel AI SDK Integration
 
 ```typescript
-import { createAI } from 'ai';
-import { viaBrowserTool } from '@via-browser/ai-sdk';
+import { createAI } from 'ai'
+import { viaBrowserTool } from '@via-browser/ai-sdk'
 
 const ai = createAI({
   tools: {
     browser: viaBrowserTool({
-      token: process.env.VIA_BROWSER_TOKEN
-    })
-  }
-});
+      token: process.env.VIA_BROWSER_TOKEN,
+    }),
+  },
+})
 
 // AI can now use browser autonomously
-const result = await ai.chat('Find the latest AI research papers and summarize them');
+const result = await ai.chat(
+  'Find the latest AI research papers and summarize them',
+)
 ```
 
 ### LangChain Integration
@@ -439,24 +464,31 @@ result = agent.run("Navigate to GitHub trending and extract top 5 repositories")
 ## 📊 Use Cases
 
 ### 1. **Competitive Intelligence**
+
 Automated monitoring of competitor websites, pricing changes, and product launches.
 
 ### 2. **Data Enrichment**
+
 Enhance datasets by scraping additional information from web sources.
 
 ### 3. **Testing & QA**
+
 Visual regression testing, end-to-end testing, and automated quality assurance.
 
 ### 4. **Content Generation**
+
 Screenshot websites for social media, generate PDFs from web content, create visual documentation.
 
 ### 5. **Lead Generation**
+
 Scrape business directories, extract contact information, and build prospect lists.
 
 ### 6. **Market Research**
+
 Gather product reviews, sentiment analysis from forums, and trend analysis.
 
 ### 7. **Monitoring & Alerts**
+
 Track website changes, price monitoring, and availability alerts.
 
 ## 🔐 Security & Best Practices
@@ -465,13 +497,13 @@ Track website changes, price monitoring, and availability alerts.
 
 ```javascript
 // Store tokens securely
-const token = process.env.VIA_BROWSER_TOKEN;
+const token = process.env.VIA_BROWSER_TOKEN
 
 // Use different tokens for different environments
 const tokens = {
   development: process.env.VIA_DEV_TOKEN,
-  production: process.env.VIA_PROD_TOKEN
-};
+  production: process.env.VIA_PROD_TOKEN,
+}
 ```
 
 ### Rate Limiting
@@ -482,13 +514,13 @@ Via Browser implements automatic rate limiting. Handle gracefully:
 async function resilientRequest(fn, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
     try {
-      return await fn();
+      return await fn()
     } catch (error) {
       if (error.message.includes('rate limit') && i < maxRetries - 1) {
-        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
-        continue;
+        await new Promise((resolve) => setTimeout(resolve, 2000 * (i + 1)))
+        continue
       }
-      throw error;
+      throw error
     }
   }
 }
@@ -499,17 +531,17 @@ async function resilientRequest(fn, maxRetries = 3) {
 Always close browsers to prevent resource leaks:
 
 ```javascript
-let browser;
+let browser
 try {
   browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
-  });
-  
+    browserWSEndpoint:
+      'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN',
+  })
+
   // Your automation code
-  
 } finally {
   if (browser) {
-    await browser.close();
+    await browser.close()
   }
 }
 ```
@@ -519,28 +551,28 @@ try {
 Via Browser extends the standard CDP with custom commands:
 
 ```javascript
-const cdp = await page.createCDPSession();
+const cdp = await page.createCDPSession()
 
 // Get live session URL
 const { liveURL } = await cdp.send('ViaBrowser.getLiveURL', {
   quality: 'high',
-  type: 'interact'
-});
+  type: 'interact',
+})
 
 // Set session timeout
 await cdp.send('ViaBrowser.setSessionTimeout', {
-  timeout: 300000  // 5 minutes
-});
+  timeout: 300000, // 5 minutes
+})
 
 // Get session stats
-const stats = await cdp.send('ViaBrowser.getSessionStats');
-console.log(stats);  // { memory, cpu, networkRequests, ... }
+const stats = await cdp.send('ViaBrowser.getSessionStats')
+console.log(stats) // { memory, cpu, networkRequests, ... }
 
 // Inject custom extension
 await cdp.send('ViaBrowser.loadExtension', {
   path: 'path/to/extension',
-  persistent: true
-});
+  persistent: true,
+})
 ```
 
 ## 📚 Additional Resources
