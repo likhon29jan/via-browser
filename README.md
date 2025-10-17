@@ -12,7 +12,7 @@
 
 **Empower your AI agents with real browser capabilities**
 
-[Get Started](#-quick-start) • [Features](#-features) • [Documentation](#-documentation) • [Examples](#-examples) • [AI Agents](AGENTS.md)
+[Get Started](#-quick-start) • [Features](#-features) • [Documentation](#-documentation) • [Examples](#-examples) • [AI Agents](AGENTS.md) • [Vision Roadmap](docs/vision-roadmap.md) • [API Reference](docs/api-reference.md)
 
 </div>
 
@@ -336,7 +336,7 @@ async function withRetry(fn, maxRetries = 3) {
 | `/firefox` | Firefox | Playwright |
 | `/webkit` | WebKit | Playwright |
 
-**[Full API Documentation →](https://viabrowserai.vercel.app/docs)**
+**[Detailed Endpoint Guide →](docs/api-reference.md)** • **[Hosted Docs →](https://viabrowserai.vercel.app/docs)**
 
 ---
 
