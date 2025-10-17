@@ -43,7 +43,7 @@ Unleash the full potential of the web. Via Browser empowers you with:
 - 🤖 AI agent integration
 - 🌐 Multi-browser support (Chrome, Firefox, WebKit)
 
-![Via Browser Features](public/via-browser-fast-light-geek-best-choice-1.jpg)
+![Via Browser Features](public/1286x0w.webp)
 
 ---
 
