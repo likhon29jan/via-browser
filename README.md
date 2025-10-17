@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Via Browser](public/via-browser-apk-mod.png)
+![Via Browser](https://raw.githubusercontent.com/likhon29jan/via-browser/refs/heads/main/public/1286x0w.webp)
 
 **Fast, Simple, and Secure Browser Automation**
 
