@@ -1,76 +1,89 @@
-import React from 'react';
+import React from 'react'
 
-const Section: React.FC<React.PropsWithChildren<{ title: string; id?: string }>> = ({ title, id, children }) => (
+const Section: React.FC<
+  React.PropsWithChildren<{ title: string; id?: string }>
+> = ({ title, id, children }) => (
   <section id={id} className="mt-12 first:mt-0">
-    <h2 className="text-2xl font-bold mb-4 text-zinc-50">{title}</h2>
-    <div className="space-y-5 text-lg leading-relaxed text-zinc-200">{children}</div>
+    <h2 className="mb-4 text-2xl font-bold text-zinc-50">{title}</h2>
+    <div className="space-y-5 text-lg leading-relaxed text-zinc-200">
+      {children}
+    </div>
   </section>
-);
+)
 
-const SubSection: React.FC<React.PropsWithChildren<{ title: string }>> = ({ title, children }) => (
+const SubSection: React.FC<React.PropsWithChildren<{ title: string }>> = ({
+  title,
+  children,
+}) => (
   <div className="mt-6">
-    <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <h3 className="mb-2 text-xl font-semibold">{title}</h3>
     <div className="space-y-3">{children}</div>
   </div>
-);
+)
 
-const CodeBlock: React.FC<React.PropsWithChildren<{ language?: string }>> = ({ language, children }) => (
-  <pre className="overflow-x-auto rounded-xl bg-zinc-900/80 ring-1 ring-zinc-800 p-5 text-sm text-zinc-100 shadow-inner">
-    <code className={language ? `language-${language}` : undefined}>{children}</code>
+const CodeBlock: React.FC<React.PropsWithChildren<{ language?: string }>> = ({
+  language,
+  children,
+}) => (
+  <pre className="overflow-x-auto rounded-xl bg-zinc-900/80 p-5 text-sm text-zinc-100 shadow-inner ring-1 ring-zinc-800">
+    <code className={language ? `language-${language}` : undefined}>
+      {children}
+    </code>
   </pre>
-);
+)
 
-const makeCode = (lines: string[]) => lines.join('\n');
+const makeCode = (lines: string[]) => lines.join('\n')
 
 type ServiceModel = {
-  name: string;
-  useCase: string;
-  differentiator: string;
-};
+  name: string
+  useCase: string
+  differentiator: string
+}
 
 type KeyFeature = {
-  title: string;
-  description?: string;
-  bullets: string[];
-  useCase?: string;
-};
+  title: string
+  description?: string
+  bullets: string[]
+  useCase?: string
+}
 
 type CodeExample = {
-  title: string;
-  language: string;
-  code: string;
-  description?: string;
-};
+  title: string
+  language: string
+  code: string
+  description?: string
+}
 
 type AgentPattern = {
-  title: string;
-  description: string;
-  code: string;
-  language: string;
-};
+  title: string
+  description: string
+  code: string
+  language: string
+}
 
 const serviceModels: ServiceModel[] = [
   {
     name: 'CDP-Based API',
     useCase: 'Cross-language automation with low-level control',
-    differentiator: 'Direct Chrome DevTools Protocol access for maximum flexibility'
+    differentiator:
+      'Direct Chrome DevTools Protocol access for maximum flexibility',
   },
   {
     name: 'Browsers as a Service (BaaS)',
     useCase: 'Running custom scripts with Playwright/Puppeteer',
-    differentiator: 'Local development experience in the cloud'
+    differentiator: 'Local development experience in the cloud',
   },
   {
     name: 'REST APIs',
     useCase: 'Simple tasks (PDFs, screenshots, scraping)',
-    differentiator: 'Stateless HTTP requests for quick integrations'
+    differentiator: 'Stateless HTTP requests for quick integrations',
   },
   {
     name: 'AI Agent SDK',
-    useCase: 'Intelligent automation with LLM integration',
-    differentiator: 'Built-in context management and decision-making'
-  }
-];
+    usecase: 'Intelligent automation with LLM integration',
+    differentiator: 'Built-in context management and decision-making',
+  },
+]
 
 const keyFeatures: KeyFeature[] = [
   {
@@ -80,9 +93,10 @@ const keyFeatures: KeyFeature[] = [
     bullets: [
       '<strong>Live View</strong>: Generate a live URL to watch browser sessions as they execute',
       '<strong>Real-time Interaction</strong>: Take control of sessions for debugging or handling CAPTCHAs',
-      '<strong>Quality Control</strong>: Tune streaming quality with <code>quality</code> and <code>type</code> parameters'
+      '<strong>Quality Control</strong>: Tune streaming quality with <code>quality</code> and <code>type</code> parameters',
     ],
-    useCase: 'Perfect for debugging complex automations or scenarios requiring human intervention.'
+    useCase:
+      'Perfect for debugging complex automations or scenarios requiring human intervention.',
   },
   {
     title: '2. Robust Session Management',
@@ -90,8 +104,8 @@ const keyFeatures: KeyFeature[] = [
       '<strong>Connect &amp; Reconnect</strong>: Pause and resume sessions maintaining full state',
       '<strong>Session Persistence</strong>: Keep sessions alive across multiple operations',
       '<strong>Resource Limits</strong>: Set time, memory, and capability constraints',
-      '<strong>Kill Controls</strong>: Terminate sessions programmatically or automatically'
-    ]
+      '<strong>Kill Controls</strong>: Terminate sessions programmatically or automatically',
+    ],
   },
   {
     title: '3. Chrome DevTools Protocol (CDP) API',
@@ -100,8 +114,8 @@ const keyFeatures: KeyFeature[] = [
       '<strong>Cross-Language Support</strong>: Works with any language that can send WebSocket messages',
       '<strong>Custom Commands</strong>: Extended CDP commands specific to Via Browser',
       '<strong>Event Streaming</strong>: Real-time events for monitoring automation progress',
-      '<strong>Network Interception</strong>: Modify requests, responses, and inject custom logic'
-    ]
+      '<strong>Network Interception</strong>: Modify requests, responses, and inject custom logic',
+    ],
   },
   {
     title: '4. Advanced Infrastructure',
@@ -110,34 +124,34 @@ const keyFeatures: KeyFeature[] = [
       '<strong>Custom Extensions</strong>: Upload and run your own browser extensions',
       '<strong>Multiplexing</strong>: Route multiple sessions through shared resources while maintaining isolation',
       '<strong>Multi-Token Access Control</strong>: Team-friendly API key management',
-      '<strong>Stealth Mode</strong>: Advanced bot detection evasion techniques'
-    ]
-  }
-];
+      '<strong>Stealth Mode</strong>: Advanced bot detection evasion techniques',
+    ],
+  },
+]
 
 const technicalExamples: CodeExample[] = [
   {
     title: '// Puppeteer (Chromium)',
     language: 'javascript',
     code: makeCode([
-      "// Puppeteer (Chromium)",
+      '// Puppeteer (Chromium)',
       "import puppeteer from 'puppeteer-core';",
       '',
-      "const browser = await puppeteer.connect({",
+      'const browser = await puppeteer.connect({',
       "  browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'",
       '});',
       '',
       'const page = await browser.newPage();',
       "await page.goto('https://example.com');",
       'const content = await page.content();',
-      'await browser.close();'
-    ])
+      'await browser.close();',
+    ]),
   },
   {
     title: '// Playwright (Firefox)',
     language: 'javascript',
     code: makeCode([
-      "// Playwright (Firefox)",
+      '// Playwright (Firefox)',
       "import { firefox } from 'playwright';",
       '',
       'const browser = await firefox.connect(',
@@ -147,22 +161,22 @@ const technicalExamples: CodeExample[] = [
       'const context = await browser.newContext();',
       'const page = await context.newPage();',
       "await page.goto('https://example.com');",
-      'await browser.close();'
-    ])
+      'await browser.close();',
+    ]),
   },
   {
     title: '// Playwright (WebKit)',
     language: 'javascript',
     code: makeCode([
-      "// Playwright (WebKit)",
+      '// Playwright (WebKit)',
       "import { webkit } from 'playwright';",
       '',
       'const browser = await webkit.connect(',
       "  'wss://viabrowserai.vercel.app/webkit?token=YOUR_TOKEN'",
-      ');'
-    ])
-  }
-];
+      ');',
+    ]),
+  },
+]
 
 const restApiExamples: CodeExample[] = [
   {
@@ -172,18 +186,18 @@ const restApiExamples: CodeExample[] = [
       'curl -X POST "https://viabrowserai.vercel.app/pdf?token=YOUR_TOKEN" \\',
       "  -H 'Content-Type: application/json' \\",
       "  -d '{",
-      "    \"url\": \"https://example.com\",",
-      "    \"options\": {",
-      "      \"format\": \"A4\",",
-      "      \"printBackground\": true,",
-      "      \"margin\": {",
-      "        \"top\": \"1cm\",",
-      "        \"bottom\": \"1cm\"",
+      '    "url": "https://example.com",',
+      '    "options": {',
+      '      "format": "A4",',
+      '      "printBackground": true,',
+      '      "margin": {',
+      '        "top": "1cm",',
+      '        "bottom": "1cm"',
       '      }',
       '    }',
       "  }' \\",
-      '  -o output.pdf'
-    ])
+      '  -o output.pdf',
+    ]),
   },
   {
     title: 'Capture Screenshot',
@@ -192,15 +206,15 @@ const restApiExamples: CodeExample[] = [
       'curl -X POST "https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN" \\',
       "  -H 'Content-Type: application/json' \\",
       "  -d '{",
-      "    \"url\": \"https://example.com\",",
-      "    \"options\": {",
-      "      \"type\": \"png\",",
-      "      \"fullPage\": true,",
-      "      \"quality\": 90",
+      '    "url": "https://example.com",',
+      '    "options": {',
+      '      "type": "png",',
+      '      "fullPage": true,',
+      '      "quality": 90',
       '    }',
       "  }' \\",
-      '  -o screenshot.png'
-    ])
+      '  -o screenshot.png',
+    ]),
   },
   {
     title: 'Web Scraping',
@@ -209,13 +223,13 @@ const restApiExamples: CodeExample[] = [
       'curl -X POST "https://viabrowserai.vercel.app/content?token=YOUR_TOKEN" \\',
       "  -H 'Content-Type: application/json' \\",
       "  -d '{",
-      "    \"url\": \"https://example.com\",",
-      "    \"waitFor\": \"networkidle\",",
-      "    \"selector\": \"article\"",
-      "  }'"
-    ])
-  }
-];
+      '    "url": "https://example.com",',
+      '    "waitFor": "networkidle",',
+      '    "selector": "article"',
+      "  }'",
+    ]),
+  },
+]
 
 const liveSessionSnippet: CodeExample = {
   title: 'createLiveSession.ts',
@@ -245,9 +259,9 @@ const liveSessionSnippet: CodeExample = {
     "  await page.type('#search', 'AI automation');",
     '',
     '  return liveURL;',
-    '}'
-  ])
-};
+    '}',
+  ]),
+}
 
 const stealthModeSnippet: CodeExample = {
   title: 'Stealth Mode',
@@ -264,9 +278,9 @@ const stealthModeSnippet: CodeExample = {
     "  timezone: 'America/New_York'",
     '}));',
     '',
-    'const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=${launchOptions}`;'
-  ])
-};
+    'const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=${launchOptions}`;',
+  ]),
+}
 
 const agentPatterns: AgentPattern[] = [
   {
@@ -304,7 +318,7 @@ const agentPatterns: AgentPattern[] = [
       '    max_tokens: 2000,',
       '    messages: [{',
       "      role: 'user',",
-      "      content: `Analyze these search results about \"${topic}\" and provide key insights:\\n\\n${JSON.stringify(results, null, 2)}`",
+      '      content: `Analyze these search results about "${topic}" and provide key insights:\\n\\n${JSON.stringify(results, null, 2)}`',
       '    }]',
       '  });',
       '',
@@ -314,8 +328,8 @@ const agentPatterns: AgentPattern[] = [
       '    searchResults: results,',
       '    analysis: response.content[0].text',
       '  };',
-      '}'
-    ])
+      '}',
+    ]),
   },
   {
     title: 'Pattern 2: Visual Understanding Agent',
@@ -364,8 +378,8 @@ const agentPatterns: AgentPattern[] = [
       '  });',
       '',
       '  return analysis.content[0].text;',
-      '}'
-    ])
+      '}',
+    ]),
   },
   {
     title: 'Pattern 3: Workflow Automation Agent',
@@ -377,7 +391,7 @@ const agentPatterns: AgentPattern[] = [
       '',
       'async function workflowAgent(task) {',
       '  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });',
-      "  const browser = await puppeteer.connect({",
+      '  const browser = await puppeteer.connect({',
       "    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'",
       '  });',
       '',
@@ -390,7 +404,7 @@ const agentPatterns: AgentPattern[] = [
       '    max_tokens: 1000,',
       '    messages: [{',
       "      role: 'user',",
-      "      content: `Create a step-by-step plan to: ${task}\\n\\nRespond with JSON:{\"steps\": [\"step1\", \"step2\", ...]}`",
+      '      content: `Create a step-by-step plan to: ${task}\\n\\nRespond with JSON:{"steps": ["step1", "step2", ...]}`',
       '    }]',
       '  });',
       '',
@@ -398,13 +412,13 @@ const agentPatterns: AgentPattern[] = [
       '',
       '  // Execute each step',
       '  for (const step of plan.steps) {',
-      "    console.log(`Executing: ${step}`);",
+      '    console.log(`Executing: ${step}`);',
       '',
       '    // Get current page state',
       '    const pageInfo = await page.evaluate(() => ({',
       '      url: window.location.href,',
       '      title: document.title,',
-      '      forms: Array.from(document.querySelectorAll(\'form\')).length,',
+      "      forms: Array.from(document.querySelectorAll('form')).length,",
       "      buttons: Array.from(document.querySelectorAll('button')).map(b =>",
       '        b.textContent.trim()',
       '      )',
@@ -413,7 +427,7 @@ const agentPatterns: AgentPattern[] = [
       '    // Ask Claude what to do next',
       '    conversationHistory.push({',
       "      role: 'user',",
-      "      content: `Current page: ${JSON.stringify(pageInfo)}\\nNext step: ${step}\\n\\nProvide Puppeteer code to execute this step.`",
+      '      content: `Current page: ${JSON.stringify(pageInfo)}\\nNext step: ${step}\\n\\nProvide Puppeteer code to execute this step.`',
       '    });',
       '',
       '    response = await anthropic.messages.create({',
@@ -422,7 +436,7 @@ const agentPatterns: AgentPattern[] = [
       '      messages: conversationHistory',
       '    });',
       '',
-      '    const code = response.content[0].text.match(/```javascript\\n([\\s\\S]*?)\\n```/)?[1];',
+      '    const code = response.content[0].text.match(/```javascript\\n([\\s\\S]*?)\\n```/)?.[1];',
       '',
       '    if (code) {',
       '      // Execute the generated code (in production, use proper sandboxing)',
@@ -440,10 +454,10 @@ const agentPatterns: AgentPattern[] = [
       '  await browser.close();',
       '',
       '  return { success: true, steps: plan.steps };',
-      '}'
-    ])
-  }
-];
+      '}',
+    ]),
+  },
+]
 
 const integrations: CodeExample[] = [
   {
@@ -469,8 +483,8 @@ const integrations: CodeExample[] = [
       '      }',
       '    }',
       '  ]',
-      '}'
-    ])
+      '}',
+    ]),
   },
   {
     title: 'Vercel AI SDK Integration',
@@ -487,9 +501,9 @@ const integrations: CodeExample[] = [
       '  }',
       '});',
       '',
-      "// AI can now use browser autonomously",
-      "const result = await ai.chat('Find the latest AI research papers and summarize them');"
-    ])
+      '// AI can now use browser autonomously',
+      "const result = await ai.chat('Find the latest AI research papers and summarize them');",
+    ]),
   },
   {
     title: 'LangChain Integration',
@@ -509,10 +523,10 @@ const integrations: CodeExample[] = [
       '    agent="zero-shot-react-description"',
       ')',
       '',
-      'result = agent.run("Navigate to GitHub trending and extract top 5 repositories")'
-    ])
-  }
-];
+      'result = agent.run("Navigate to GitHub trending and extract top 5 repositories")',
+    ]),
+  },
+]
 
 const useCases: string[] = [
   '<strong>Competitive Intelligence</strong>: Automated monitoring of competitor websites, pricing changes, and product launches.',
@@ -521,8 +535,8 @@ const useCases: string[] = [
   '<strong>Content Generation</strong>: Screenshot websites for social media, generate PDFs from web content, create visual documentation.',
   '<strong>Lead Generation</strong>: Scrape business directories, extract contact information, and build prospect lists.',
   '<strong>Market Research</strong>: Gather product reviews, sentiment analysis from forums, and trend analysis.',
-  '<strong>Monitoring &amp; Alerts</strong>: Track website changes, price monitoring, and availability alerts.'
-];
+  '<strong>Monitoring &amp; Alerts</strong>: Track website changes, price monitoring, and availability alerts.',
+]
 
 const securitySnippets: CodeExample[] = [
   {
@@ -536,12 +550,13 @@ const securitySnippets: CodeExample[] = [
       'const tokens = {',
       '  development: process.env.VIA_DEV_TOKEN,',
       '  production: process.env.VIA_PROD_TOKEN',
-      '};'
-    ])
+      '};',
+    ]),
   },
   {
     title: 'Rate Limiting',
-    description: 'Via Browser implements automatic rate limiting. Handle gracefully:',
+    description:
+      'Via Browser implements automatic rate limiting. Handle gracefully:',
     language: 'javascript',
     code: makeCode([
       'async function resilientRequest(fn, maxRetries = 3) {',
@@ -556,8 +571,8 @@ const securitySnippets: CodeExample[] = [
       '      throw error;',
       '    }',
       '  }',
-      '}'
-    ])
+      '}',
+    ]),
   },
   {
     title: 'Resource Cleanup',
@@ -576,10 +591,10 @@ const securitySnippets: CodeExample[] = [
       '  if (browser) {',
       '    await browser.close();',
       '  }',
-      '}'
-    ])
-  }
-];
+      '}',
+    ]),
+  },
+]
 
 const cdpCommandsSnippet: CodeExample = {
   title: 'Advanced CDP Commands',
@@ -606,61 +621,73 @@ const cdpCommandsSnippet: CodeExample = {
     "await cdp.send('ViaBrowser.loadExtension', {",
     "  path: 'path/to/extension',",
     '  persistent: true',
-    '});'
-  ])
-};
+    '});',
+  ]),
+}
 
 const resources = [
   {
     label: 'GitHub Repository',
-    href: 'https://github.com/likhon29jan/via-browser'
+    href: 'https://github.com/likhon29jan/via-browser',
   },
   {
     label: 'Live Platform',
-    href: 'https://viabrowserai.vercel.app/'
+    href: 'https://viabrowserai.vercel.app/',
   },
   {
     label: 'API Documentation',
-    href: 'https://viabrowserai.vercel.app/docs'
+    href: 'https://viabrowserai.vercel.app/docs',
   },
   {
     label: 'Discord Community',
-    href: '#'
+    href: '#',
   },
   {
     label: 'Example Projects',
-    href: 'https://github.com/likhon29jan/via-browser/tree/main/examples'
-  }
-];
+    href: 'https://github.com/likhon29jan/via-browser/tree/main/examples',
+  },
+]
 
 const AgentsPage = () => {
   return (
     <main className="container mx-auto max-w-5xl px-6 py-12">
-      <h1 className="text-4xl font-bold mb-10 text-zinc-50">AI Agent Integration Guide for Via Browser</h1>
+      <h1 className="mb-10 text-4xl font-bold text-zinc-50">
+        AI Agent Integration Guide for Via Browser
+      </h1>
 
       <Section title="Overview" id="overview">
         <p>
-          Via Browser is a powerful browser automation platform designed for AI agents, developers, and automation workflows.
-          Built on Chrome DevTools Protocol (CDP) and supporting multiple browser engines, Via Browser provides the
-          infrastructure needed for intelligent web automation at scale.
+          Via Browser is a powerful browser automation platform designed for AI
+          agents, developers, and automation workflows. Built on Chrome DevTools
+          Protocol (CDP) and supporting multiple browser engines, Via Browser
+          provides the infrastructure needed for intelligent web automation at
+          scale.
         </p>
       </Section>
 
-      <Section title="🎯 Core Architecture & Service Models" id="service-models">
-        <p>Via Browser offers multiple entry points for browser automation, each optimized for different use cases:</p>
+      <Section
+        title="🎯 Core Architecture & Service Models"
+        id="service-models"
+      >
+        <p>
+          Via Browser offers multiple entry points for browser automation, each
+          optimized for different use cases:
+        </p>
         <div className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-900/60">
           <table className="w-full text-left">
             <thead className="bg-zinc-900/80">
-              <tr className="text-sm uppercase tracking-wide text-zinc-400">
+              <tr className="text-sm tracking-wide text-zinc-400 uppercase">
                 <th className="px-4 py-3 font-semibold">Service Model</th>
                 <th className="px-4 py-3 font-semibold">Primary Use-Case</th>
                 <th className="px-4 py-3 font-semibold">Key Differentiator</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-zinc-800 text-base text-zinc-200">
-              {serviceModels.map(model => (
+              {serviceModels.map((model) => (
                 <tr key={model.name}>
-                  <td className="px-4 py-3 font-semibold text-zinc-100">{model.name}</td>
+                  <td className="px-4 py-3 font-semibold text-zinc-100">
+                    {model.name}
+                  </td>
                   <td className="px-4 py-3">{model.useCase}</td>
                   <td className="px-4 py-3">{model.differentiator}</td>
                 </tr>
@@ -673,86 +700,106 @@ const AgentsPage = () => {
       <Section title="🔧 Key Features" id="key-features">
         <SubSection title="1. Hybrid Automation & Live Session Interactivity">
           <p>
-            Via Browser enables a human-in-the-loop approach where automated scripts can be monitored and controlled in
-            real-time:
+            Via Browser enables a human-in-the-loop approach where automated
+            scripts can be monitored and controlled in real-time:
           </p>
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-inside list-disc space-y-1">
             <li>
-              <strong>Live View</strong>: Generate a live URL to watch browser sessions as they execute
+              <strong>Live View</strong>: Generate a live URL to watch browser
+              sessions as they execute
             </li>
             <li>
-              <strong>Real-time Interaction</strong>: Take control of sessions for debugging or handling CAPTCHAs
+              <strong>Real-time Interaction</strong>: Take control of sessions
+              for debugging or handling CAPTCHAs
             </li>
             <li>
-              <strong>Quality Control</strong>: Tune streaming quality with <code>quality</code> and <code>type</code>
+              <strong>Quality Control</strong>: Tune streaming quality with{' '}
+              <code>quality</code> and <code>type</code>
               parameters
             </li>
           </ul>
           <p>
-            <strong>Use Case</strong>: Perfect for debugging complex automations or scenarios requiring human intervention.
+            <strong>Use Case</strong>: Perfect for debugging complex automations
+            or scenarios requiring human intervention.
           </p>
         </SubSection>
 
         <SubSection title="2. Robust Session Management">
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-inside list-disc space-y-1">
             <li>
-              <strong>Connect & Reconnect</strong>: Pause and resume sessions maintaining full state
+              <strong>Connect & Reconnect</strong>: Pause and resume sessions
+              maintaining full state
             </li>
             <li>
-              <strong>Session Persistence</strong>: Keep sessions alive across multiple operations
+              <strong>Session Persistence</strong>: Keep sessions alive across
+              multiple operations
             </li>
             <li>
-              <strong>Resource Limits</strong>: Set time, memory, and capability constraints
+              <strong>Resource Limits</strong>: Set time, memory, and capability
+              constraints
             </li>
             <li>
-              <strong>Kill Controls</strong>: Terminate sessions programmatically or automatically
+              <strong>Kill Controls</strong>: Terminate sessions
+              programmatically or automatically
             </li>
           </ul>
         </SubSection>
 
         <SubSection title="3. Chrome DevTools Protocol (CDP) API">
           <p>Foundation for advanced browser control:</p>
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-inside list-disc space-y-1">
             <li>
-              <strong>Cross-Language Support</strong>: Works with any language that can send WebSocket messages
+              <strong>Cross-Language Support</strong>: Works with any language
+              that can send WebSocket messages
             </li>
             <li>
-              <strong>Custom Commands</strong>: Extended CDP commands specific to Via Browser
+              <strong>Custom Commands</strong>: Extended CDP commands specific
+              to Via Browser
             </li>
             <li>
-              <strong>Event Streaming</strong>: Real-time events for monitoring automation progress
+              <strong>Event Streaming</strong>: Real-time events for monitoring
+              automation progress
             </li>
             <li>
-              <strong>Network Interception</strong>: Modify requests, responses, and inject custom logic
+              <strong>Network Interception</strong>: Modify requests, responses,
+              and inject custom logic
             </li>
           </ul>
         </SubSection>
 
         <SubSection title="4. Advanced Infrastructure">
-          <ul className="list-disc list-inside space-y-1">
+          <ul className="list-inside list-disc space-y-1">
             <li>
-              <strong>Multi-Browser Support</strong>: Chromium, Chrome, Firefox, and WebKit
+              <strong>Multi-Browser Support</strong>: Chromium, Chrome, Firefox,
+              and WebKit
             </li>
             <li>
-              <strong>Custom Extensions</strong>: Upload and run your own browser extensions
+              <strong>Custom Extensions</strong>: Upload and run your own
+              browser extensions
             </li>
             <li>
-              <strong>Multiplexing</strong>: Route multiple sessions through shared resources while maintaining isolation
+              <strong>Multiplexing</strong>: Route multiple sessions through
+              shared resources while maintaining isolation
             </li>
             <li>
-              <strong>Multi-Token Access Control</strong>: Team-friendly API key management
+              <strong>Multi-Token Access Control</strong>: Team-friendly API key
+              management
             </li>
             <li>
-              <strong>Stealth Mode</strong>: Advanced bot detection evasion techniques
+              <strong>Stealth Mode</strong>: Advanced bot detection evasion
+              techniques
             </li>
           </ul>
         </SubSection>
       </Section>
 
-      <Section title="💻 Technical Implementation" id="technical-implementation">
+      <Section
+        title="💻 Technical Implementation"
+        id="technical-implementation"
+      >
         <SubSection title="Quick Start: BaaS with Puppeteer/Playwright">
           <p>Connect via WebSocket for full programmatic control:</p>
-          {technicalExamples.map(example => (
+          {technicalExamples.map((example) => (
             <CodeBlock key={example.title} language={example.language}>
               {example.code}
             </CodeBlock>
@@ -762,11 +809,13 @@ const AgentsPage = () => {
 
       <Section title="Live Session URL Generation" id="live-session-url">
         <p>Create interactive, shareable browser sessions:</p>
-        <CodeBlock language={liveSessionSnippet.language}>{liveSessionSnippet.code}</CodeBlock>
+        <CodeBlock language={liveSessionSnippet.language}>
+          {liveSessionSnippet.code}
+        </CodeBlock>
       </Section>
 
       <Section title="REST API Examples" id="rest-api-examples">
-        {restApiExamples.map(example => (
+        {restApiExamples.map((example) => (
           <SubSection key={example.title} title={example.title}>
             <CodeBlock language={example.language}>{example.code}</CodeBlock>
           </SubSection>
@@ -775,350 +824,64 @@ const AgentsPage = () => {
 
       <Section title="Stealth Mode Configuration" id="stealth-mode">
         <p>Enable advanced bot detection evasion:</p>
-        <CodeBlock language="javascript">
-          {`const browser = await puppeteer.connect({
-  browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'
-});
-
-// Or via REST API
-const launchOptions = encodeURIComponent(JSON.stringify({
-  stealth: true,
-  blockAds: true,
-  timezone: 'America/New_York'
-}));
-
-const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=${launchOptions}`;`}
-        </CodeBlock>
+        <CodeBlock language="javascript">{stealthModeSnippet.code}</CodeBlock>
       </Section>
 
       <Section title="🤖 AI Agent Integration Patterns" id="ai-agent-patterns">
-        <SubSection title="Pattern 1: Web Research Agent">
-          <p>AI agents can orchestrate browsers to gather intelligence:</p>
-          <CodeBlock language="javascript">
-            {`import { Anthropic } from '@anthropic-ai/sdk';
-import puppeteer from 'puppeteer-core';
-
-async function researchAgent(topic) {
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-  const browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
-  });
-
-  const page = await browser.newPage();
-
-  // Navigate to search
-  await page.goto(`https://www.google.com/search?q=${encodeURIComponent(topic)}`);
-
-  // Extract search results
-  const results = await page.evaluate(() => {
-    return Array.from(document.querySelectorAll('.g')).slice(0, 5).map(el => ({
-      title: el.querySelector('h3')?.textContent,
-      snippet: el.querySelector('.VwiC3b')?.textContent,
-      url: el.querySelector('a')?.href
-    }));
-  });
-
-  // Let Claude analyze the results
-  const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 2000,
-    messages: [{
-      role: 'user',
-      content: `Analyze these search results about "${topic}" and provide key insights:\n\n${JSON.stringify(results, null, 2)}`
-    }]
-  });
-
-  await browser.close();
-
-  return {
-    searchResults: results,
-    analysis: response.content[0].text
-  };
-}`}
-          </CodeBlock>
-        </SubSection>
-
-        <SubSection title="Pattern 2: Visual Understanding Agent">
-          <p>Combine screenshots with vision models:</p>
-          <CodeBlock language="javascript">
-            {`import Anthropic from '@anthropic-ai/sdk';
-
-async function analyzeWebpage(url) {
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
-  // Capture screenshot via REST API
-  const response = await fetch(`https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      url: url,
-      options: { type: 'png', fullPage: true }
-    })
-  });
-
-  const imageBuffer = await response.arrayBuffer();
-  const base64Image = Buffer.from(imageBuffer).toString('base64');
-
-  // Analyze with Claude's vision capabilities
-  const analysis = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 1500,
-    messages: [{
-      role: 'user',
-      content: [
-        {
-          type: 'image',
-          source: {
-            type: 'base64',
-            media_type: 'image/png',
-            data: base64Image
-          }
-        },
-        {
-          type: 'text',
-          text: 'Analyze this webpage. What is the main purpose? Identify key UI elements and provide UX recommendations.'
-        }
-      ]
-    }]
-  });
-
-  return analysis.content[0].text;
-}`}
-          </CodeBlock>
-        </SubSection>
-
-        <SubSection title="Pattern 3: Workflow Automation Agent">
-          <p>Multi-step automation with decision-making:</p>
-          <CodeBlock language="javascript">
-            {`import { Anthropic } from '@anthropic-ai/sdk';
-import puppeteer from 'puppeteer-core';
-
-async function workflowAgent(task) {
-  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'
-  });
-
-  const page = await browser.newPage();
-  const conversationHistory = [];
-
-  // Initial plan
-  let response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 1000,
-    messages: [{
-      role: 'user',
-      content: `Create a step-by-step plan to: ${task}\n\nRespond with JSON:{"steps": ["step1", "step2", ...]}`
-    }]
-  });
-
-  const plan = JSON.parse(response.content[0].text);
-
-  // Execute each step
-  for (const step of plan.steps) {
-    console.log(`Executing: ${step}`);
-
-    // Get current page state
-    const pageInfo = await page.evaluate(() => ({
-      url: window.location.href,
-      title: document.title,
-      forms: Array.from(document.querySelectorAll('form')).length,
-      buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim())
-    }));
-
-    // Ask Claude what to do next
-    conversationHistory.push({
-      role: 'user',
-      content: `Current page: ${JSON.stringify(pageInfo)}\nNext step: ${step}\n\nProvide Puppeteer code to execute this step.`
-    });
-
-    response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 500,
-      messages: conversationHistory
-    });
-
-    const code = response.content[0].text.match(/```javascript\n([\s\S]*?)\n```/)?[1];
-
-    if (code) {
-      // Execute the generated code (in production, use proper sandboxing)
-      await eval(`(async () => { ${code} })()`);
-    }
-
-    conversationHistory.push({
-      role: 'assistant',
-      content: response.content[0].text
-    });
-
-    await page.waitForTimeout(1000);
-  }
-
-  await browser.close();
-
-  return { success: true, steps: plan.steps };
-}`}
-          </CodeBlock>
-        </SubSection>
+        {agentPatterns.map((pattern) => (
+          <SubSection key={pattern.title} title={pattern.title}>
+            <p>{pattern.description}</p>
+            <CodeBlock language={pattern.language}>{pattern.code}</CodeBlock>
+          </SubSection>
+        ))}
       </Section>
 
       <Section title="🔌 Pre-built Integrations" id="prebuilt-integrations">
-        <SubSection title="n8n Workflow Integration">
-          <p>Via Browser provides native n8n nodes for visual automation:</p>
-          <CodeBlock language="javascript">
-            {`// n8n workflow example
-{
-  "nodes": [
-    {
-      "type": "ViaBrowser.Scrape",
-      "parameters": {
-        "url": "https://news.ycombinator.com",
-        "selector": ".athing",
-        "waitFor": "networkidle"
-      }
-    },
-    {
-      "type": "AI.Claude",
-      "parameters": {
-        "prompt": "Summarize these Hacker News posts"
-      }
-    }
-  ]
-}`}
-          </CodeBlock>
-        </SubSection>
-
-        <SubSection title="Vercel AI SDK Integration">
-          <CodeBlock language="typescript">
-            {`import { createAI } from 'ai';
-import { viaBrowserTool } from '@via-browser/ai-sdk';
-
-const ai = createAI({
-  tools: {
-    browser: viaBrowserTool({
-      token: process.env.VIA_BROWSER_TOKEN
-    })
-  }
-});
-
-// AI can now use browser autonomously
-const result = await ai.chat('Find the latest AI research papers and summarize them');`}
-          </CodeBlock>
-        </SubSection>
-
-        <SubSection title="LangChain Integration">
-          <CodeBlock language="python">
-            {`from langchain.tools import ViaBrowserTool
-from langchain.agents import initialize_agent
-
-browser_tool = ViaBrowserTool(
-    token=os.environ['VIA_BROWSER_TOKEN'],
-    base_url='https://viabrowserai.vercel.app'
-)
-
-agent = initialize_agent(
-    tools=[browser_tool],
-    llm=llm,
-    agent="zero-shot-react-description"
-)
-
-result = agent.run("Navigate to GitHub trending and extract top 5 repositories")`}
-          </CodeBlock>
-        </SubSection>
+        {integrations.map((integration) => (
+          <SubSection key={integration.title} title={integration.title}>
+            {integration.description && <p>{integration.description}</p>}
+            <CodeBlock language={integration.language}>
+              {integration.code}
+            </CodeBlock>
+          </SubSection>
+        ))}
       </Section>
 
       <Section title="📊 Use Cases" id="use-cases">
         <div className="space-y-4">
-          <div>
-            <h3 className="text-xl font-semibold">1. <strong>Competitive Intelligence</strong></h3>
-            <p>Automated monitoring of competitor websites, pricing changes, and product launches.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">2. <strong>Data Enrichment</strong></h3>
-            <p>Enhance datasets by scraping additional information from web sources.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">3. <strong>Testing & QA</strong></h3>
-            <p>Visual regression testing, end-to-end testing, and automated quality assurance.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">4. <strong>Content Generation</strong></h3>
-            <p>Screenshot websites for social media, generate PDFs from web content, create visual documentation.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">5. <strong>Lead Generation</strong></h3>
-            <p>Scrape business directories, extract contact information, and build prospect lists.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">6. <strong>Market Research</strong></h3>
-            <p>Gather product reviews, sentiment analysis from forums, and trend analysis.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">7. <strong>Monitoring & Alerts</strong></h3>
-            <p>Track website changes, price monitoring, and availability alerts.</p>
-          </div>
+          {useCases.map((useCase, i) => (
+            <div key={i}>
+              <h3
+                className="text-xl font-semibold"
+                dangerouslySetInnerHTML={{ __html: `${i + 1}. ${useCase}` }}
+              />
+            </div>
+          ))}
         </div>
       </Section>
 
-      <Section title="🔐 Security & Best Practices" id="security-best-practices">
-        <SubSection title="Token Management">
-          <CodeBlock language="javascript">
-            {`// Store tokens securely
-const token = process.env.VIA_BROWSER_TOKEN;
-
-// Use different tokens for different environments
-const tokens = {
-  development: process.env.VIA_DEV_TOKEN,
-  production: process.env.VIA_PROD_TOKEN
-};`}
-          </CodeBlock>
-        </SubSection>
-        <SubSection title="Rate Limiting">
-          <p>Via Browser implements automatic rate limiting. Handle gracefully:</p>
-          <CodeBlock language="javascript">
-            {`async function resilientRequest(fn, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (error.message.includes('rate limit') && i < maxRetries - 1) {
-        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
-        continue;
-      }
-      throw error;
-    }
-  }
-}`}
-          </CodeBlock>
-        </SubSection>
-        <SubSection title="Resource Cleanup">
-          <p>Always close browsers to prevent resource leaks:</p>
-          <CodeBlock language="javascript">
-            {`let browser;
-try {
-  browser = await puppeteer.connect({
-    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
-  });
-
-  // Your automation code
-
-} finally {
-  if (browser) {
-    await browser.close();
-  }
-}`}
-          </CodeBlock>
-        </SubSection>
+      <Section
+        title="🔐 Security & Best Practices"
+        id="security-best-practices"
+      >
+        {securitySnippets.map((snippet) => (
+          <SubSection key={snippet.title} title={snippet.title}>
+            {snippet.description && <p>{snippet.description}</p>}
+            <CodeBlock language={snippet.language}>{snippet.code}</CodeBlock>
+          </SubSection>
+        ))}
       </Section>
 
       <Section title="🚀 Advanced CDP Commands" id="advanced-cdp-commands">
         <p>Via Browser extends the standard CDP with custom commands:</p>
-        <CodeBlock language={cdpCommandsSnippet.language}>{cdpCommandsSnippet.code}</CodeBlock>
+        <CodeBlock language={cdpCommandsSnippet.language}>
+          {cdpCommandsSnippet.code}
+        </CodeBlock>
       </Section>
 
       <Section title="📚 Additional Resources" id="additional-resources">
-        <ul className="list-disc list-inside space-y-1">
-          {resources.map(resource => (
+        <ul className="list-inside list-disc space-y-1">
+          {resources.map((resource) => (
             <li key={resource.label} className="text-zinc-200">
               <strong>{resource.label}</strong>:{' '}
               <a className="text-sky-400 underline" href={resource.href}>
@@ -1132,7 +895,10 @@ try {
       <Section title="🤝 Contributing" id="contributing">
         <p>
           We welcome contributions! Check out our{' '}
-          <a className="text-sky-400 underline" href="https://github.com/likhon29jan/via-browser/blob/main/CONTRIBUTING.md">
+          <a
+            className="text-sky-400 underline"
+            href="https://github.com/likhon29jan/via-browser/blob/main/CONTRIBUTING.md"
+          >
             Contributing Guide
           </a>{' '}
           to get started.
@@ -1142,7 +908,10 @@ try {
       <Section title="📄 License" id="license">
         <p>
           Via Browser is licensed under the MIT License. See{' '}
-          <a className="text-sky-400 underline" href="https://github.com/likhon29jan/via-browser/blob/main/LICENSE">
+          <a
+            className="text-sky-400 underline"
+            href="https://github.com/likhon29jan/via-browser/blob/main/LICENSE"
+          >
             LICENSE
           </a>{' '}
           for details.
@@ -1150,11 +919,11 @@ try {
       </Section>
 
       <p className="mt-16 text-lg font-semibold text-zinc-100">
-        Ready to build intelligent browser automation? Get started with Via Browser today and empower your AI agents with real
-        browser capabilities.
+        Ready to build intelligent browser automation? Get started with Via
+        Browser today and empower your AI agents with real browser capabilities.
       </p>
     </main>
-  );
-};
+  )
+}
 
-export default AgentsPage;
+export default AgentsPage

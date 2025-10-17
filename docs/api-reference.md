@@ -6,12 +6,12 @@ This reference catalogs the core REST and WebSocket endpoints that power Via Bro
 
 ## REST Endpoints
 
-| Endpoint | Method | Description |
-| -------- | ------ | ----------- |
+| Endpoint      | Method | Description                 |
+| ------------- | ------ | --------------------------- |
 | `/screenshot` | `POST` | Capture webpage screenshots |
-| `/pdf` | `POST` | Generate PDF documents |
-| `/content` | `POST` | Extract page content |
-| `/scrape` | `POST` | Scrape structured data |
+| `/pdf`        | `POST` | Generate PDF documents      |
+| `/content`    | `POST` | Extract page content        |
+| `/scrape`     | `POST` | Scrape structured data      |
 
 ### `/screenshot` — Capture webpage screenshots
 
@@ -146,11 +146,11 @@ This reference catalogs the core REST and WebSocket endpoints that power Via Bro
 
 ## WebSocket Endpoints
 
-| Endpoint | Browser | Library |
-| -------- | ------- | ------- |
-| `/chromium` | Chrome | Puppeteer / Playwright |
-| `/firefox` | Firefox | Playwright |
-| `/webkit` | WebKit | Playwright |
+| Endpoint    | Browser | Library                |
+| ----------- | ------- | ---------------------- |
+| `/chromium` | Chrome  | Puppeteer / Playwright |
+| `/firefox`  | Firefox | Playwright             |
+| `/webkit`   | WebKit  | Playwright             |
 
 ### `/chromium` — Chrome-grade automation
 
