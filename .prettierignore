@@ -1,0 +1,9 @@
+# Next.js build outputs
+.next/
+
+# Node.js dependencies
+node_modules/
+
+# Other
+*.log
+*.lock

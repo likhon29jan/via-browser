@@ -1,22 +1,19 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
 
-import { getWebSocketEndpoint } from "@/lib/reference/api-reference";
+import { getWebSocketEndpoint } from '@/lib/reference/api-reference'
 
-export const dynamic = "force-static";
-export const revalidate = 3600;
+export const dynamic = 'force-static'
+export const revalidate = 3600
 
 export async function GET(
   _request: Request,
-  { params }: { params: { endpointId: string } }
+  { params }: { params: { endpointId: string } },
 ) {
-  const endpoint = getWebSocketEndpoint(params.endpointId);
+  const endpoint = getWebSocketEndpoint(params.endpointId)
 
   if (!endpoint) {
-    return NextResponse.json(
-      { error: "Endpoint not found" },
-      { status: 404 }
-    );
+    return NextResponse.json({ error: 'Endpoint not found' }, { status: 404 })
   }
 
-  return NextResponse.json(endpoint);
+  return NextResponse.json(endpoint)
 }
