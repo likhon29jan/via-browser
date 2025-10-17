@@ -9,8 +9,8 @@ const Section: React.FC<React.PropsWithChildren<{ title: string; id?: string }>>
 
 const SubSection: React.FC<React.PropsWithChildren<{ title: string }>> = ({ title, children }) => (
   <div className="mt-6">
-    <h3 className="text-xl font-semibold mb-2 text-zinc-100">{title}</h3>
-    <div className="space-y-3 text-zinc-200">{children}</div>
+    <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <div className="space-y-3">{children}</div>
   </div>
 );
 
@@ -671,22 +671,82 @@ const AgentsPage = () => {
       </Section>
 
       <Section title="🔧 Key Features" id="key-features">
-        {keyFeatures.map(feature => (
-          <SubSection key={feature.title} title={feature.title}>
-            {feature.description && <p dangerouslySetInnerHTML={{ __html: feature.description }} />}
-            <ul className="list-disc list-inside space-y-1 text-zinc-200">
-              {feature.bullets.map(point => (
-                <li key={point} dangerouslySetInnerHTML={{ __html: point }} />
-              ))}
-            </ul>
-            {feature.useCase && (
-              <p
-                className="font-semibold"
-                dangerouslySetInnerHTML={{ __html: `<strong>Use Case</strong>: ${feature.useCase}` }}
-              />
-            )}
-          </SubSection>
-        ))}
+        <SubSection title="1. Hybrid Automation & Live Session Interactivity">
+          <p>
+            Via Browser enables a human-in-the-loop approach where automated scripts can be monitored and controlled in
+            real-time:
+          </p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              <strong>Live View</strong>: Generate a live URL to watch browser sessions as they execute
+            </li>
+            <li>
+              <strong>Real-time Interaction</strong>: Take control of sessions for debugging or handling CAPTCHAs
+            </li>
+            <li>
+              <strong>Quality Control</strong>: Tune streaming quality with <code>quality</code> and <code>type</code>
+              parameters
+            </li>
+          </ul>
+          <p>
+            <strong>Use Case</strong>: Perfect for debugging complex automations or scenarios requiring human intervention.
+          </p>
+        </SubSection>
+
+        <SubSection title="2. Robust Session Management">
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              <strong>Connect & Reconnect</strong>: Pause and resume sessions maintaining full state
+            </li>
+            <li>
+              <strong>Session Persistence</strong>: Keep sessions alive across multiple operations
+            </li>
+            <li>
+              <strong>Resource Limits</strong>: Set time, memory, and capability constraints
+            </li>
+            <li>
+              <strong>Kill Controls</strong>: Terminate sessions programmatically or automatically
+            </li>
+          </ul>
+        </SubSection>
+
+        <SubSection title="3. Chrome DevTools Protocol (CDP) API">
+          <p>Foundation for advanced browser control:</p>
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              <strong>Cross-Language Support</strong>: Works with any language that can send WebSocket messages
+            </li>
+            <li>
+              <strong>Custom Commands</strong>: Extended CDP commands specific to Via Browser
+            </li>
+            <li>
+              <strong>Event Streaming</strong>: Real-time events for monitoring automation progress
+            </li>
+            <li>
+              <strong>Network Interception</strong>: Modify requests, responses, and inject custom logic
+            </li>
+          </ul>
+        </SubSection>
+
+        <SubSection title="4. Advanced Infrastructure">
+          <ul className="list-disc list-inside space-y-1">
+            <li>
+              <strong>Multi-Browser Support</strong>: Chromium, Chrome, Firefox, and WebKit
+            </li>
+            <li>
+              <strong>Custom Extensions</strong>: Upload and run your own browser extensions
+            </li>
+            <li>
+              <strong>Multiplexing</strong>: Route multiple sessions through shared resources while maintaining isolation
+            </li>
+            <li>
+              <strong>Multi-Token Access Control</strong>: Team-friendly API key management
+            </li>
+            <li>
+              <strong>Stealth Mode</strong>: Advanced bot detection evasion techniques
+            </li>
+          </ul>
+        </SubSection>
       </Section>
 
       <Section title="💻 Technical Implementation" id="technical-implementation">
@@ -715,42 +775,340 @@ const AgentsPage = () => {
 
       <Section title="Stealth Mode Configuration" id="stealth-mode">
         <p>Enable advanced bot detection evasion:</p>
-        <CodeBlock language={stealthModeSnippet.language}>{stealthModeSnippet.code}</CodeBlock>
+        <CodeBlock language="javascript">
+          {`const browser = await puppeteer.connect({
+  browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'
+});
+
+// Or via REST API
+const launchOptions = encodeURIComponent(JSON.stringify({
+  stealth: true,
+  blockAds: true,
+  timezone: 'America/New_York'
+}));
+
+const url = `https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN&launch=${launchOptions}`;`}
+        </CodeBlock>
       </Section>
 
       <Section title="🤖 AI Agent Integration Patterns" id="ai-agent-patterns">
-        {agentPatterns.map(pattern => (
-          <SubSection key={pattern.title} title={pattern.title}>
-            <p>{pattern.description}</p>
-            <CodeBlock language={pattern.language}>{pattern.code}</CodeBlock>
-          </SubSection>
-        ))}
+        <SubSection title="Pattern 1: Web Research Agent">
+          <p>AI agents can orchestrate browsers to gather intelligence:</p>
+          <CodeBlock language="javascript">
+            {`import { Anthropic } from '@anthropic-ai/sdk';
+import puppeteer from 'puppeteer-core';
+
+async function researchAgent(topic) {
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
+  });
+
+  const page = await browser.newPage();
+
+  // Navigate to search
+  await page.goto(`https://www.google.com/search?q=${encodeURIComponent(topic)}`);
+
+  // Extract search results
+  const results = await page.evaluate(() => {
+    return Array.from(document.querySelectorAll('.g')).slice(0, 5).map(el => ({
+      title: el.querySelector('h3')?.textContent,
+      snippet: el.querySelector('.VwiC3b')?.textContent,
+      url: el.querySelector('a')?.href
+    }));
+  });
+
+  // Let Claude analyze the results
+  const response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 2000,
+    messages: [{
+      role: 'user',
+      content: `Analyze these search results about "${topic}" and provide key insights:\n\n${JSON.stringify(results, null, 2)}`
+    }]
+  });
+
+  await browser.close();
+
+  return {
+    searchResults: results,
+    analysis: response.content[0].text
+  };
+}`}
+          </CodeBlock>
+        </SubSection>
+
+        <SubSection title="Pattern 2: Visual Understanding Agent">
+          <p>Combine screenshots with vision models:</p>
+          <CodeBlock language="javascript">
+            {`import Anthropic from '@anthropic-ai/sdk';
+
+async function analyzeWebpage(url) {
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+  // Capture screenshot via REST API
+  const response = await fetch(`https://viabrowserai.vercel.app/screenshot?token=YOUR_TOKEN`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      url: url,
+      options: { type: 'png', fullPage: true }
+    })
+  });
+
+  const imageBuffer = await response.arrayBuffer();
+  const base64Image = Buffer.from(imageBuffer).toString('base64');
+
+  // Analyze with Claude's vision capabilities
+  const analysis = await anthropic.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1500,
+    messages: [{
+      role: 'user',
+      content: [
+        {
+          type: 'image',
+          source: {
+            type: 'base64',
+            media_type: 'image/png',
+            data: base64Image
+          }
+        },
+        {
+          type: 'text',
+          text: 'Analyze this webpage. What is the main purpose? Identify key UI elements and provide UX recommendations.'
+        }
+      ]
+    }]
+  });
+
+  return analysis.content[0].text;
+}`}
+          </CodeBlock>
+        </SubSection>
+
+        <SubSection title="Pattern 3: Workflow Automation Agent">
+          <p>Multi-step automation with decision-making:</p>
+          <CodeBlock language="javascript">
+            {`import { Anthropic } from '@anthropic-ai/sdk';
+import puppeteer from 'puppeteer-core';
+
+async function workflowAgent(task) {
+  const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const browser = await puppeteer.connect({
+    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN&stealth=true'
+  });
+
+  const page = await browser.newPage();
+  const conversationHistory = [];
+
+  // Initial plan
+  let response = await anthropic.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1000,
+    messages: [{
+      role: 'user',
+      content: `Create a step-by-step plan to: ${task}\n\nRespond with JSON:{"steps": ["step1", "step2", ...]}`
+    }]
+  });
+
+  const plan = JSON.parse(response.content[0].text);
+
+  // Execute each step
+  for (const step of plan.steps) {
+    console.log(`Executing: ${step}`);
+
+    // Get current page state
+    const pageInfo = await page.evaluate(() => ({
+      url: window.location.href,
+      title: document.title,
+      forms: Array.from(document.querySelectorAll('form')).length,
+      buttons: Array.from(document.querySelectorAll('button')).map(b => b.textContent.trim())
+    }));
+
+    // Ask Claude what to do next
+    conversationHistory.push({
+      role: 'user',
+      content: `Current page: ${JSON.stringify(pageInfo)}\nNext step: ${step}\n\nProvide Puppeteer code to execute this step.`
+    });
+
+    response = await anthropic.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 500,
+      messages: conversationHistory
+    });
+
+    const code = response.content[0].text.match(/```javascript\n([\s\S]*?)\n```/)?[1];
+
+    if (code) {
+      // Execute the generated code (in production, use proper sandboxing)
+      await eval(`(async () => { ${code} })()`);
+    }
+
+    conversationHistory.push({
+      role: 'assistant',
+      content: response.content[0].text
+    });
+
+    await page.waitForTimeout(1000);
+  }
+
+  await browser.close();
+
+  return { success: true, steps: plan.steps };
+}`}
+          </CodeBlock>
+        </SubSection>
       </Section>
 
       <Section title="🔌 Pre-built Integrations" id="prebuilt-integrations">
-        {integrations.map(integration => (
-          <SubSection key={integration.title} title={integration.title}>
-            {integration.description && <p>{integration.description}</p>}
-            <CodeBlock language={integration.language}>{integration.code}</CodeBlock>
-          </SubSection>
-        ))}
+        <SubSection title="n8n Workflow Integration">
+          <p>Via Browser provides native n8n nodes for visual automation:</p>
+          <CodeBlock language="javascript">
+            {`// n8n workflow example
+{
+  "nodes": [
+    {
+      "type": "ViaBrowser.Scrape",
+      "parameters": {
+        "url": "https://news.ycombinator.com",
+        "selector": ".athing",
+        "waitFor": "networkidle"
+      }
+    },
+    {
+      "type": "AI.Claude",
+      "parameters": {
+        "prompt": "Summarize these Hacker News posts"
+      }
+    }
+  ]
+}`}
+          </CodeBlock>
+        </SubSection>
+
+        <SubSection title="Vercel AI SDK Integration">
+          <CodeBlock language="typescript">
+            {`import { createAI } from 'ai';
+import { viaBrowserTool } from '@via-browser/ai-sdk';
+
+const ai = createAI({
+  tools: {
+    browser: viaBrowserTool({
+      token: process.env.VIA_BROWSER_TOKEN
+    })
+  }
+});
+
+// AI can now use browser autonomously
+const result = await ai.chat('Find the latest AI research papers and summarize them');`}
+          </CodeBlock>
+        </SubSection>
+
+        <SubSection title="LangChain Integration">
+          <CodeBlock language="python">
+            {`from langchain.tools import ViaBrowserTool
+from langchain.agents import initialize_agent
+
+browser_tool = ViaBrowserTool(
+    token=os.environ['VIA_BROWSER_TOKEN'],
+    base_url='https://viabrowserai.vercel.app'
+)
+
+agent = initialize_agent(
+    tools=[browser_tool],
+    llm=llm,
+    agent="zero-shot-react-description"
+)
+
+result = agent.run("Navigate to GitHub trending and extract top 5 repositories")`}
+          </CodeBlock>
+        </SubSection>
       </Section>
 
       <Section title="📊 Use Cases" id="use-cases">
-        <ul className="space-y-3">
-          {useCases.map(useCase => (
-            <li key={useCase} className="text-lg" dangerouslySetInnerHTML={{ __html: useCase }} />
-          ))}
-        </ul>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-xl font-semibold">1. <strong>Competitive Intelligence</strong></h3>
+            <p>Automated monitoring of competitor websites, pricing changes, and product launches.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">2. <strong>Data Enrichment</strong></h3>
+            <p>Enhance datasets by scraping additional information from web sources.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">3. <strong>Testing & QA</strong></h3>
+            <p>Visual regression testing, end-to-end testing, and automated quality assurance.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">4. <strong>Content Generation</strong></h3>
+            <p>Screenshot websites for social media, generate PDFs from web content, create visual documentation.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">5. <strong>Lead Generation</strong></h3>
+            <p>Scrape business directories, extract contact information, and build prospect lists.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">6. <strong>Market Research</strong></h3>
+            <p>Gather product reviews, sentiment analysis from forums, and trend analysis.</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">7. <strong>Monitoring & Alerts</strong></h3>
+            <p>Track website changes, price monitoring, and availability alerts.</p>
+          </div>
+        </div>
       </Section>
 
       <Section title="🔐 Security & Best Practices" id="security-best-practices">
-        {securitySnippets.map(snippet => (
-          <SubSection key={snippet.title} title={snippet.title}>
-            {snippet.description && <p>{snippet.description}</p>}
-            <CodeBlock language={snippet.language}>{snippet.code}</CodeBlock>
-          </SubSection>
-        ))}
+        <SubSection title="Token Management">
+          <CodeBlock language="javascript">
+            {`// Store tokens securely
+const token = process.env.VIA_BROWSER_TOKEN;
+
+// Use different tokens for different environments
+const tokens = {
+  development: process.env.VIA_DEV_TOKEN,
+  production: process.env.VIA_PROD_TOKEN
+};`}
+          </CodeBlock>
+        </SubSection>
+        <SubSection title="Rate Limiting">
+          <p>Via Browser implements automatic rate limiting. Handle gracefully:</p>
+          <CodeBlock language="javascript">
+            {`async function resilientRequest(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (error.message.includes('rate limit') && i < maxRetries - 1) {
+        await new Promise(resolve => setTimeout(resolve, 2000 * (i + 1)));
+        continue;
+      }
+      throw error;
+    }
+  }
+}`}
+          </CodeBlock>
+        </SubSection>
+        <SubSection title="Resource Cleanup">
+          <p>Always close browsers to prevent resource leaks:</p>
+          <CodeBlock language="javascript">
+            {`let browser;
+try {
+  browser = await puppeteer.connect({
+    browserWSEndpoint: 'wss://viabrowserai.vercel.app/chromium?token=YOUR_TOKEN'
+  });
+
+  // Your automation code
+
+} finally {
+  if (browser) {
+    await browser.close();
+  }
+}`}
+          </CodeBlock>
+        </SubSection>
       </Section>
 
       <Section title="🚀 Advanced CDP Commands" id="advanced-cdp-commands">
