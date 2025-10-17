@@ -77,7 +77,7 @@ export default function Home() {
           <h2 className="mb-12 text-center text-4xl font-bold">
             Why Via Browser?
           </h2>
-          <div className="grid gap-12 md:grid-cols-3">
+          <div className="grid gap-12 md:grid-cols-4">
             <div className="text-center">
               <h3 className="mb-2 text-2xl font-bold">
                 Get past CAPTCHAs and bot detectors with BrowserQL
@@ -92,6 +92,19 @@ export default function Home() {
               <h3 className="mb-2 text-2xl font-bold">
                 Enterprise grade self-hosted or private deployment options
               </h3>
+            </div>
+            <div className="text-center">
+              <h3 className="mb-2 text-2xl font-bold">
+                Run browser scraping with the full power of Puppeteer and
+                Playwright
+              </h3>
+              <p>
+                Unlike many scraping tools, you can also use the standard
+                Puppeteer and Playwright libraries to run any script for
+                browser scraping. You can click buttons, navigate dynamic
+                content or anything else. Just host the scripts in your
+                servers and connect them to our browsers.
+              </p>
             </div>
           </div>
         </div>
