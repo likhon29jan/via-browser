@@ -16,8 +16,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <main className="container mx-auto px-6 py-20 text-center">
-        <h1 className="text-5xl font-bold mb-4">Via Browser</h1>
-        <p className="text-xl mb-8">Fast, Simple, and Secure Browser Automation</p>
+        <h1 className="text-5xl font-bold mb-4">A web browser for your AI</h1>
+        <p className="text-xl mb-8">Via Browser powers web browsing capabilities for AI agents and applications.</p>
         <div className="space-x-4">
           <a href="#quick-start" className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700">Get Started</a>
           <a href="/" className="border border-gray-400 px-6 py-3 rounded-full font-semibold hover:bg-gray-100">Visit Website</a>
